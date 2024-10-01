@@ -20,7 +20,7 @@ After CMake finishes compiling, you should have a `libevo_commonlogin.so` shared
 
 ### Installing
 
-To install, simply copy the built shared object into your system's shared library directory. In this example, we are using an x86 machine. Keep in mind that the directory name might change depending on your architecture, but it will be in the same relative location.
+To install, simply copy the built shared object into your system's shared library directory. Presently, the module will only compile on x86_64 machines.
 
 ```shell
 sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/pam_evo_common.so
