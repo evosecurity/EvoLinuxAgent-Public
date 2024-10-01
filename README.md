@@ -4,7 +4,7 @@
 ## **Warning:** This is beta software and should not be used on production systems. By installing this software you agree that Evo is not liable for any problems that may arise from its use.
 
 ## Dependencies
-The only dependency required is libpam. Install libpam based on your operating system's package manager. Example provided below is for Debian based systems using apt.
+The only required dependency is `libpam`. Install `libpam` using your operating system's package manager. The example below is for Debian-based systems using `apt`:
 ```shell
 sudo apt install libpam0g-dev
 ```
@@ -67,7 +67,7 @@ Open `/etc/pam.d/su` with your favorite editor, and at the top of the file, add:
 ```sh
 @include evo_common
 ```
-gi 
+
 > **Note:** There are no services to restart when editing PAM; changes are automatically reloaded upon edits.
 
 ### Allowing Users to Log In with Evo
