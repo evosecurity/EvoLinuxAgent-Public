@@ -1,8 +1,11 @@
+
 # Evo Linux Agent
 
-> All instructions assume that the repository has been cloned on your target machine.
+## **Warning:** This is beta software and should not be used on production systems. By installing this software you agree that Evo is not liable for any problems that may arise from its use.
 
 ## Installation Guide
+
+> All instructions assume that the repository has been cloned on your target machine.
 
 Installing the Evo Linux Agent involves a few steps. Please follow them carefully, as Linux is sensitive with authentication settings.
 
