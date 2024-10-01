@@ -67,7 +67,7 @@ Open `/etc/pam.d/su` with your favorite editor, and at the top of the file, add:
 ```sh
 @include evo_common
 ```
-
+gi 
 > **Note:** There are no services to restart when editing PAM; changes are automatically reloaded upon edits.
 
 ### Allowing Users to Log In with Evo
