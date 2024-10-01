@@ -3,6 +3,12 @@
 
 ## **Warning:** This is beta software and should not be used on production systems. By installing this software you agree that Evo is not liable for any problems that may arise from its use.
 
+## Dependencies
+The only required dependency is `libpam`. Install `libpam` using your operating system's package manager. The example below is for Debian-based systems using `apt`:
+```shell
+sudo apt install libpam0g-dev
+```
+
 ## Installation Guide
 
 > All instructions assume that the repository has been cloned on your target machine.
@@ -26,7 +32,7 @@ After CMake finishes compiling, you should have a `libevo_commonlogin.so` shared
 To install, simply copy the built shared object into your system's shared library directory. Presently, the module will only compile on x86_64 machines.
 
 ```shell
-sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/pam_evo_common.so
+sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/security/pam_evo_common.so
 ```
 
 ### Configuration Guide
@@ -54,9 +60,9 @@ In that file, add:
 auth  sufficient  pam_evo_common.so
 ```
 
-Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/sshd` to override SSH authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
+Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/su` to override Super User (or sometimes referred as switching users) authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
 
-Open `/etc/pam.d/sshd` with your favorite editor, and at the top of the file, add:
+Open `/etc/pam.d/su` with your favorite editor, and at the top of the file, add:
 
 ```sh
 @include evo_common
