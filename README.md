@@ -91,6 +91,6 @@ Update the following settings. If it's not there, add it.
 ```shell
 ChallengeResponseAuthentication yes
 GSSAPIAuthentication no
-PasswordAuthentication yes
+PasswordAuthentication no
 KbdInteractiveAuthentication yes
 ```
