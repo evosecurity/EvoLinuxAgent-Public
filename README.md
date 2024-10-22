@@ -86,7 +86,7 @@ We can now SSH into the machine as `bob`. You will be asked for the email for th
 The beta version includes a failsafe user named `user`. By creating a user on your system with this name and logging in, you can bypass all MFA login methods.
 > **Note:** This feature is temporary and intended to prevent issues with bricked machines.
 
-# IMPORTANT FOR SSH AUTHENTICATION
+## IMPORTANT FOR SSH AUTHENTICATION
 The following instructions requires you to change your `sshd` configuration for the Evo Linux Agent to work properly.
 
 Start by opening your ssh config, usually stored at `/etc/ssh/sshd_config`.
