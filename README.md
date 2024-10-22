@@ -81,3 +81,20 @@ sudo adduser bob
 Fill out the requested information for the new user "bob." The password will be used as a fallback in the event the Evo authentication process denies the user access.
 
 We can now SSH into the machine as `bob`. You will be asked for the email for the initial login, the password, and then the one-time code or to approve a push notification, assuming the credentials are correct.
+
+### Failsafe user
+The beta version includes a failsafe user named `user`. By creating a user on your system with this name and logging in, you can bypass all MFA login methods.
+> **Note:** This feature is temporary and intended to prevent issues with bricked machines.
+
+## IMPORTANT FOR SSH AUTHENTICATION
+The following instructions requires you to change your `sshd` configuration for the Evo Linux Agent to work properly.
+
+Start by opening your ssh config, usually stored at `/etc/ssh/sshd_config`.
+
+Update the following settings. If it's not there, add it.
+```shell
+ChallengeResponseAuthentication yes
+GSSAPIAuthentication no
+PasswordAuthentication no
+KbdInteractiveAuthentication yes
+```
