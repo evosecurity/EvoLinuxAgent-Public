@@ -60,7 +60,7 @@ In that file, add:
 auth  sufficient  pam_evo_common.so
 ```
 
-Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/su` to override Super User (or sometimes referred as switching users) authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
+Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/sshd` to override SSH authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
 
 Open `/etc/pam.d/sshd` with your favorite editor, and at the top of the file, add:
 
