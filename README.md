@@ -40,7 +40,7 @@ sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/security/pam_evo_commo
 Now that we have installed the Evo module, we need to configure some settings to match our environment. Run the following commands:
 
 ```shell
-mkdir -p /etc/evosecurity.d
+sudo mkdir -p /etc/evosecurity.d
 echo -e "[api]\naccess_token=\nsecret=\nenvironment_url=\ndirectory=\n" | sudo tee /etc/evosecurity.d/config.ini
 ```
 
@@ -62,7 +62,7 @@ auth  sufficient  pam_evo_common.so
 
 Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/su` to override Super User (or sometimes referred as switching users) authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
 
-Open `/etc/pam.d/su` with your favorite editor, and at the top of the file, add:
+Open `/etc/pam.d/sshd` with your favorite editor, and at the top of the file, add:
 
 ```sh
 @include evo_common
@@ -97,4 +97,9 @@ ChallengeResponseAuthentication yes
 GSSAPIAuthentication no
 PasswordAuthentication no
 KbdInteractiveAuthentication yes
+```
+
+Now run the following command to restart the SSH service.
+```shell
+sudo systemctl restart sshd
 ```
