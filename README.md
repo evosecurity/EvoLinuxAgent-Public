@@ -40,7 +40,7 @@ sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/security/pam_evo_commo
 Now that we have installed the Evo module, we need to configure some settings to match our environment. Run the following commands:
 
 ```shell
-mkdir -p /etc/evosecurity.d
+sudo mkdir -p /etc/evosecurity.d
 echo -e "[api]\naccess_token=\nsecret=\nenvironment_url=\ndirectory=\n" | sudo tee /etc/evosecurity.d/config.ini
 ```
 
@@ -60,9 +60,9 @@ In that file, add:
 auth  sufficient  pam_evo_common.so
 ```
 
-Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/su` to override Super User (or sometimes referred as switching users) authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
+Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/sshd` to override SSH authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
 
-Open `/etc/pam.d/su` with your favorite editor, and at the top of the file, add:
+Open `/etc/pam.d/sshd` with your favorite editor, and at the top of the file, add:
 
 ```sh
 @include evo_common
@@ -81,3 +81,25 @@ sudo adduser bob
 Fill out the requested information for the new user "bob." The password will be used as a fallback in the event the Evo authentication process denies the user access.
 
 We can now SSH into the machine as `bob`. You will be asked for the email for the initial login, the password, and then the one-time code or to approve a push notification, assuming the credentials are correct.
+
+### Failsafe user
+The beta version includes a failsafe user named `user`. By creating a user on your system with this name and logging in, you can bypass all MFA login methods.
+> **Note:** This feature is temporary and intended to prevent issues with bricked machines.
+
+## IMPORTANT FOR SSH AUTHENTICATION
+The following instructions requires you to change your `sshd` configuration for the Evo Linux Agent to work properly.
+
+Start by opening your ssh config, usually stored at `/etc/ssh/sshd_config`.
+
+Update the following settings. If it's not there, add it.
+```shell
+ChallengeResponseAuthentication yes
+GSSAPIAuthentication no
+PasswordAuthentication no
+KbdInteractiveAuthentication yes
+```
+
+Now run the following command to restart the SSH service.
+```shell
+sudo systemctl restart sshd
+```
