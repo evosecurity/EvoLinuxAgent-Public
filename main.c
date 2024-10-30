@@ -15,4 +15,3 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh, int flags, int argc, const c
 PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **argv) {
     return EVOPAM_authenticate(pamh, flags, argc, argv);
 }
-

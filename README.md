@@ -17,30 +17,19 @@ Installing the Evo Linux Agent involves a few steps. Please follow them carefull
 
 ### Building
 
-To build from source using CMake, follow the example below:
+To build from source using Autoconf, follow the example below:
 
 ```shell
-mkdir -p build
-cmake -B build
-cmake --build build
-```
-
-After CMake finishes compiling, you should have a `libevo_commonlogin.so` shared object in the `build/` directory.
-
-### Installing
-
-To install, simply copy the built shared object into your system's shared library directory. Presently, the module will only compile on x86_64 machines.
-
-```shell
-sudo cp build/libevo_commonlogin.so /lib/x86_64-linux-gnu/security/pam_evo_common.so
-```
-
+./configure && \
+make && \
+sudo make install
+````
 ### Configuration Guide
 
 Now that we have installed the Evo module, we need to configure some settings to match our environment. Run the following commands:
 
 ```shell
-sudo mkdir -p /etc/evosecurity.d
+sudo mkdir -p /etc/evosecurity.d && \
 echo -e "[api]\naccess_token=\nsecret=\nenvironment_url=\ndirectory=\n" | sudo tee /etc/evosecurity.d/config.ini
 ```
 
@@ -57,7 +46,7 @@ Use your favorite editor to open `/etc/pam.d/evo_common`.
 In that file, add:
 
 ```sh
-auth  sufficient  pam_evo_common.so
+auth  sufficient  libpam_evocommon.so
 ```
 
 Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/sshd` to override SSH authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
