@@ -1,10 +1,11 @@
-AM_CFLAGS = -I$(top_srcdir)/include  # Include directory for headers
+# Define the library
+lib_LTLIBRARIES = libpam_evo_common.la
 
-# Define the shared library and its sources
-lib_LTLIBRARIES = libpam_evocommon.la
-libpam_evocommon_la_SOURCES = main.c
-libpam_evocommon_la_LDFLAGS = -Lvendor -shared -Wl,-soname,libpam_evocommon.so
-libpam_evocommon_la_LIBADD = -levolinuxagent  # Add the necessary libraries
+libpam_evo_common_la_SOURCES = main.c
+libpam_evo_common_la_LDFLAGS = -shared
 
-# Specify the installation directory for the library
-libpam_evocommon_la_libdir = $(LIB_libdir)
+# Specify include directories
+libpam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
+
+# Link against the evolinuxagent library
+libpam_evo_common_la_LIBS = -L$(top_srcdir)/vendor -levolinuxagent
