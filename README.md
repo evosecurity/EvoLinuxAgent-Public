@@ -6,7 +6,7 @@
 ## Dependencies
 The only required dependency is `libpam`. Install `libpam` using your operating system's package manager. The example below is for Debian-based systems using `apt`:
 ```shell
-sudo apt install libpam0g-dev
+sudo apt install libpam0g-dev autoconf automake libtool
 ```
 
 ## Installation Guide
