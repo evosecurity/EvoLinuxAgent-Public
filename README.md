@@ -47,7 +47,7 @@ Use your favorite editor to open `/etc/pam.d/evo_common`.
 In that file, add:
 
 ```sh
-auth  sufficient  libpam_evocommon.so
+auth  sufficient pam_evo_common.so
 ```
 
 Now, we can set up our PAM module to use the Evo authenticator. For this example, we will edit `/etc/pam.d/sshd` to override SSH authentication. You may run `ls /etc/pam.d` to see what other modules Linux provides for you to edit.
