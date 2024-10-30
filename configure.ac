@@ -1,4 +1,4 @@
-AC_INIT([YourProject], [1.0], [your-email@example.com])
+AC_INIT([EvoLinuxAgent], [1.0], [evosecurity])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AM_PROG_AR
