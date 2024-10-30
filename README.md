@@ -20,6 +20,7 @@ Installing the Evo Linux Agent involves a few steps. Please follow them carefull
 To build from source using Autoconf, follow the example below:
 
 ```shell
+autoreconf -i && \
 ./configure && \
 make && \
 sudo make install
