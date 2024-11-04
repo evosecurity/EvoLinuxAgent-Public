@@ -1,5 +1,13 @@
 # Build PAM module
 pammoddir = $(pamdir)
+vendorlibdir = $(libdir)
+
+# Install vendor library
+vendorlib_LTLIBRARIES = libevolinuxagent.la
+libevolinuxagent_la_SOURCES = 
+libevolinuxagent_la_LDFLAGS = -avoid-version
+# Use the pre-built .so file
+libevolinuxagent_la_LIBADD = $(top_srcdir)/vendor/libevolinuxagent.so
 
 # Build PAM module
 pammod_LTLIBRARIES = pam_evo_common.la
@@ -7,7 +15,7 @@ pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
 pam_evo_common_la_LDFLAGS = -module -avoid-version -shared
-pam_evo_common_la_LIBADD = -lpam -L$(top_srcdir)/vendor -levolinuxagent
+pam_evo_common_la_LIBADD = -lpam $(top_builddir)/libevolinuxagent.la
 
 # Headers
 include_HEADERS = include/evopam.h
@@ -32,9 +40,15 @@ install-data-hook:
 
 install-exec-hook:
 	rm -f $(DESTDIR)$(pammoddir)/pam_evo_common.la
+	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.la
+	# Update ldconfig to register the new library
+	-test -n "$(DESTDIR)" || /sbin/ldconfig
 
 uninstall-hook:
 	rm -f $(DESTDIR)$(pamconfdir)/evo_common
 	rm -f $(DESTDIR)$(configdir)/config.ini
 	rm -f $(DESTDIR)$(configdir)/config.ini.default
+	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.so*
 	-rmdir $(DESTDIR)$(configdir) 2>/dev/null || true
+	# Update ldconfig after removal
+	-test -n "$(DESTDIR)" || /sbin/ldconfig
