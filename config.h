@@ -7,6 +7,18 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
+/* Define to 1 if you have the `pam' library (-lpam). */
+#define HAVE_LIBPAM 1
+
+/* Define to 1 if you have the <security/pam_appl.h> header file. */
+#define HAVE_SECURITY_PAM_APPL_H 1
+
+/* Define to 1 if you have the <security/pam_ext.h> header file. */
+#define HAVE_SECURITY_PAM_EXT_H 1
+
+/* Define to 1 if you have the <security/pam_modules.h> header file. */
+#define HAVE_SECURITY_PAM_MODULES_H 1
+
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
 
@@ -38,7 +50,7 @@
 #define PACKAGE "pam_evo_common"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "your_email@example.com"
+#define PACKAGE_BUGREPORT "evosecurity"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "pam_evo_common"

@@ -1,3 +1,4 @@
+# Autotools base files
 Makefile.in
 /ar-lib
 /mdate-sh
@@ -8,7 +9,6 @@ Makefile.in
 .dirstamp
 
 # http://www.gnu.org/software/autoconf
-
 autom4te.cache
 /autoscan.log
 /autoscan-*.log
@@ -28,15 +28,12 @@ autom4te.cache
 /stamp-h1
 
 # https://www.gnu.org/software/libtool/
-
 /ltmain.sh
 
 # http://www.gnu.org/software/texinfo
-
 /texinfo.tex
 
 # http://www.gnu.org/software/m4/
-
 m4/libtool.m4
 m4/ltoptions.m4
 m4/ltsugar.m4
@@ -49,10 +46,39 @@ m4/lt~obsolete.m4
 # (which is called by configure script))
 Makefile
 
+# Build artifacts
+*.o
+*.lo
 *.la
+*.a
+*.so
+*.so.*
+.libs/
+build/
+build-aux/
 libtool
-main.o
-main.lo
-.libs
+config.h
 *.in*
 *h1
+
+# Editor/IDE files
+*~
+.*.swp
+.vscode/
+.idea/
+*.sublime-*
+
+# OS specific
+.DS_Store
+.directory
+Thumbs.db
+
+# Test artifacts
+test-suite.log
+*.trs
+*.log
+
+# Distribution packages
+*.tar.*
+*.zip
+dist/

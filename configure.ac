@@ -1,11 +1,35 @@
-AC_PREREQ([2.69])
-AC_INIT([pam_evo_common], [1.0], [your_email@example.com])
-AC_CONFIG_SRCDIR([main.c])
+AC_PREREQ([2.71])
+AC_INIT([pam_evo_common], [1.0], [evosecurity])
+
+# Safety checks
+AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AC_CONFIG_AUX_DIR([build-aux])
+
+# Initialize automake
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+
+# Checks for programs
 AC_PROG_CC
 AM_PROG_AR
-LT_INIT
-AC_SUBST([VERSION], [1.0])
+AC_PROG_INSTALL
+
+# Initialize libtool
+LT_INIT([disable-static])
+
+# Check for PAM
+AC_CHECK_HEADERS([security/pam_appl.h security/pam_modules.h security/pam_ext.h], [], 
+    [AC_MSG_ERROR([PAM development headers not found. Install libpam0g-dev or equivalent])])
+AC_CHECK_LIB([pam], [pam_start], [], 
+    [AC_MSG_ERROR([PAM library not found])])
+
+# Define PAM module installation directory
+AC_ARG_WITH([pam-dir],
+    AS_HELP_STRING([--with-pam-dir=DIR], [directory to install PAM modules]),
+    [pamdir=$withval],
+    [pamdir=/lib/security])
+
+AC_SUBST([pamdir])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
