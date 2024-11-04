@@ -8,13 +8,8 @@ pammod_LTLIBRARIES = pam_evo_common.la
 pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
-pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -L$(top_srcdir)/vendor
+pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -L$(abs_top_srcdir)/vendor
 pam_evo_common_la_LIBADD = -lpam -levolinuxagent
-
-install-data-hook:
-	cd $(DESTDIR)$(vendorlibdir) && \
-		ln -sf libevolinuxagent.so.1 libevolinuxagent.so && \
-		/sbin/ldconfig -n .
 
 # Headers
 include_HEADERS = include/evopam.h
@@ -36,6 +31,9 @@ install-data-hook:
 	if [ ! -f $(DESTDIR)$(pamconfdir)/evo_common ]; then \
 		echo "auth sufficient pam_evo_common.so" > $(DESTDIR)$(pamconfdir)/evo_common; \
 	fi
+	cd $(DESTDIR)$(vendorlibdir) && \
+		ln -sf libevolinuxagent.so.1 libevolinuxagent.so && \
+		/sbin/ldconfig -n .
 
 install-exec-hook:
 	rm -f $(DESTDIR)$(pammoddir)/pam_evo_common.la
