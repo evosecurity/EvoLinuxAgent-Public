@@ -7,7 +7,7 @@ pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
 pam_evo_common_la_LDFLAGS = -module -avoid-version -shared
-pam_evo_common_la_LIBADD = -lpam
+pam_evo_common_la_LIBADD = -lpam -L$(top_srcdir)/vendor -levolinuxagent
 
 # Headers
 include_HEADERS = include/evopam.h
