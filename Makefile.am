@@ -1,9 +1,6 @@
 # Install vendor library directly
 vendorlibdir = $(libdir)
-vendorlib_DATA = $(top_srcdir)/vendor/libevolinuxagent.so.1
-install-data-hook:
-	cd $(DESTDIR)$(vendorlibdir) && \
-		ln -sf libevolinuxagent.so.1 libevolinuxagent.so
+vendorlib_DATA = vendor/libevolinuxagent.so.1
 
 # Build PAM module
 pammoddir = $(pamdir)
@@ -11,8 +8,13 @@ pammod_LTLIBRARIES = pam_evo_common.la
 pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
-pam_evo_common_la_LDFLAGS = -module -avoid-version -shared
-pam_evo_common_la_LIBADD = -lpam -L$(top_srcdir)/vendor -levolinuxagent
+pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -L$(top_srcdir)/vendor
+pam_evo_common_la_LIBADD = -lpam -levolinuxagent
+
+install-data-hook:
+	cd $(DESTDIR)$(vendorlibdir) && \
+		ln -sf libevolinuxagent.so.1 libevolinuxagent.so && \
+		/sbin/ldconfig -n .
 
 # Headers
 include_HEADERS = include/evopam.h
