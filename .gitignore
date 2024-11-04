@@ -58,7 +58,8 @@ build/
 build-aux/
 libtool
 config.h
-*.in*
+*.in
+*.inc
 *h1
 
 # Editor/IDE files
