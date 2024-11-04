@@ -41,7 +41,6 @@ install-data-hook:
 install-exec-hook:
 	rm -f $(DESTDIR)$(pammoddir)/pam_evo_common.la
 	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.la
-	# Update ldconfig to register the new library
 	-test -n "$(DESTDIR)" || /sbin/ldconfig
 
 uninstall-hook:
@@ -50,5 +49,4 @@ uninstall-hook:
 	rm -f $(DESTDIR)$(configdir)/config.ini.default
 	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.so*
 	-rmdir $(DESTDIR)$(configdir) 2>/dev/null || true
-	# Update ldconfig after removal
 	-test -n "$(DESTDIR)" || /sbin/ldconfig
