@@ -1,4 +1,4 @@
-# Install vendor library directly
+# Install vendor library directly (precompiled)
 vendorlibdir = $(libdir)
 vendorlib_DATA = vendor/libevolinuxagent.so.1
 
@@ -8,8 +8,8 @@ pammod_LTLIBRARIES = pam_evo_common.la
 pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
-pam_evo_common_la_LDFLAGS = -module -avoid-version -shared
-pam_evo_common_la_LIBADD = -lpam $(abs_top_srcdir)/vendor/libevolinuxagent.so.1
+pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -Wl,-rpath,$(libdir)
+pam_evo_common_la_LIBADD = -lpam -L$(abs_top_builddir)/vendor -levolinuxagent
 
 # Headers
 include_HEADERS = include/evopam.h
@@ -31,9 +31,6 @@ install-data-hook:
 	if [ ! -f $(DESTDIR)$(pamconfdir)/evo_common ]; then \
 		echo "auth sufficient pam_evo_common.so" > $(DESTDIR)$(pamconfdir)/evo_common; \
 	fi
-	cd $(DESTDIR)$(vendorlibdir) && \
-		ln -sf libevolinuxagent.so.1 libevolinuxagent.so && \
-		/sbin/ldconfig -n .
 
 install-exec-hook:
 	rm -f $(DESTDIR)$(pammoddir)/pam_evo_common.la
@@ -44,6 +41,6 @@ uninstall-hook:
 	rm -f $(DESTDIR)$(pamconfdir)/evo_common
 	rm -f $(DESTDIR)$(configdir)/config.ini
 	rm -f $(DESTDIR)$(configdir)/config.ini.default
-	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.so*
+	rm -f $(DESTDIR)$(vendorlibdir)/libevolinuxagent.so.1
 	-rmdir $(DESTDIR)$(configdir) 2>/dev/null || true
 	-test -n "$(DESTDIR)" || /sbin/ldconfig
