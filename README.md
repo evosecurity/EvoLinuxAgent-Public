@@ -61,3 +61,8 @@ A temporary failsafe user named `user` is available to bypass MFA login methods 
 sudo make uninstall
 ```
 > Note: Manual cleanup of PAM configuration files may be required.
+
+### Advanced Configuration
+The following configure options are available:
+- `--with-pam-dir=DIR`: Directory to install PAM modules (default: /lib/security)
+- `--with-pam-config-dir=DIR`: Directory to install PAM configuration (default: /etc/pam.d)

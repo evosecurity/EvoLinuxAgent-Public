@@ -31,5 +31,13 @@ AC_ARG_WITH([pam-dir],
 
 AC_SUBST([pamdir])
 
+# Define PAM configuration directory
+AC_ARG_WITH([pam-config-dir],
+    AS_HELP_STRING([--with-pam-config-dir=DIR], [directory to install PAM configuration files]),
+    [pamconfdir=$withval],
+    [pamconfdir=/etc/pam.d])
+
+AC_SUBST([pamconfdir])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

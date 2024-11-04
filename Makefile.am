@@ -18,7 +18,7 @@ configdir = $(sysconfdir)/evosecurity.d
 config_DATA = config/config.ini.default
 
 # PAM configuration directory
-pamconfdir = $(sysconfdir)/pam.d
+pamconfdir = @pamconfdir@
 
 install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(configdir)
