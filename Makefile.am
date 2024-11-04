@@ -13,11 +13,28 @@ pam_evo_common_la_LIBADD = -lpam
 include_HEADERS = include/evopam.h
 
 # Install configuration
-install-data-hook:
-	$(MKDIR_P) $(DESTDIR)/etc/evosecurity.d
-	$(MKDIR_P) $(DESTDIR)/etc/pam.d
-	echo "auth sufficient pam_evo_common.so" > $(DESTDIR)/etc/pam.d/evo_common
+sysconf_DATA = config/config.ini.default
+configdir = $(sysconfdir)/evosecurity.d
+config_DATA = config/config.ini.default
 
-# Clean up .la files
+# PAM configuration directory
+pamconfdir = $(sysconfdir)/pam.d
+
+install-data-hook:
+	$(MKDIR_P) $(DESTDIR)$(configdir)
+	$(MKDIR_P) $(DESTDIR)$(pamconfdir)
+	if [ ! -f $(DESTDIR)$(configdir)/config.ini ]; then \
+		cp $(DESTDIR)$(configdir)/config.ini.default $(DESTDIR)$(configdir)/config.ini; \
+	fi
+	if [ ! -f $(DESTDIR)$(pamconfdir)/evo_common ]; then \
+		echo "auth sufficient pam_evo_common.so" > $(DESTDIR)$(pamconfdir)/evo_common; \
+	fi
+
 install-exec-hook:
 	rm -f $(DESTDIR)$(pammoddir)/pam_evo_common.la
+
+uninstall-hook:
+	rm -f $(DESTDIR)$(pamconfdir)/evo_common
+	rm -f $(DESTDIR)$(configdir)/config.ini
+	rm -f $(DESTDIR)$(configdir)/config.ini.default
+	-rmdir $(DESTDIR)$(configdir) 2>/dev/null || true
