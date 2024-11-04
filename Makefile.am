@@ -8,8 +8,12 @@ pammod_LTLIBRARIES = pam_evo_common.la
 pam_evo_common_la_SOURCES = src/main.c
 pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
 pam_evo_common_la_CFLAGS = -Wall -Werror
-pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -L$(abs_top_srcdir)/vendor
+pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -L$(abs_top_srcdir)/vendor -Wl,-rpath,$(libdir)
 pam_evo_common_la_LIBADD = -lpam -levolinuxagent
+
+# Create symlink before building
+all-local:
+	$(LN_S) -f $(abs_top_srcdir)/vendor/libevolinuxagent.so.1 $(abs_top_builddir)/vendor/libevolinuxagent.so
 
 # Headers
 include_HEADERS = include/evopam.h
