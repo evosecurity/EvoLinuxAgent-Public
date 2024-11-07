@@ -39,5 +39,7 @@ AC_ARG_WITH([pam-config-dir],
 
 AC_SUBST([pamconfdir])
 
+AC_DEFINE([SYSCONFDIR], ["@sysconfdir@"], [System configuration directory])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
