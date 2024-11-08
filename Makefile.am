@@ -6,7 +6,7 @@ vendorlib_DATA = vendor/libevolinuxagent.so.1
 pammoddir = $(pamdir)
 pammod_LTLIBRARIES = pam_evo_common.la
 pam_evo_common_la_SOURCES = src/main.c
-pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include
+pam_evo_common_la_CPPFLAGS = -I$(top_srcdir)/include -DSYSCONFDIR='"$(sysconfdir)"'
 pam_evo_common_la_CFLAGS = -Wall -Werror
 pam_evo_common_la_LDFLAGS = -module -avoid-version -shared -Wl,-rpath,$(libdir)
 pam_evo_common_la_LIBADD = -lpam -L$(abs_top_builddir)/vendor -levolinuxagent
