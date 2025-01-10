@@ -50,7 +50,6 @@ Makefile
 *.o
 *.lo
 *.la
-*.a
 *.so
 *.so.*
 .libs/
