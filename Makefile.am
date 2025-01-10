@@ -19,7 +19,7 @@ install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(configdir)
 	$(MKDIR_P) $(DESTDIR)$(pamconfdir)
 	if [ ! -f $(DESTDIR)$(configdir)/config.ini ]; then \
-		cp $(DESTDIR)$(configdir)/config.ini.default $(DESTDIR)$(configdir)/config.ini; \
+		cp config/config.ini.default $(DESTDIR)$(configdir)/config.ini; \
 	fi
 	if [ ! -f $(DESTDIR)$(pamconfdir)/evo_common ]; then \
 		echo "auth sufficient pam_evo_common.so" > $(DESTDIR)$(pamconfdir)/evo_common; \

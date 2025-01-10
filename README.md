@@ -9,7 +9,7 @@ This is beta software and should not be used in production systems. By installin
 Required dependencies:
 
 ```shell
-sudo apt install build-essential libpam0g-dev autoconf automake libtool
+sudo apt install build-essential libpam0g-dev autoconf automake libtool libssl-dev libmxml-dev
 ```
 
 ## Installation
