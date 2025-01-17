@@ -1,0 +1,18 @@
+name: EvoLinuxAgent-Public
+id: ari:cloud:compass:7ab74c8c-cdc7-47b4-ac42-498142383c41:component/e7890024-d21a-491e-8eed-88aeb93717f5/5789aa4b-d7f7-4474-9129-527ba0c42602
+description: Evo's Linux Agent for Secure Login and Elevated Access
+configVersion: 1
+typeId: SERVICE
+ownerId: ari:cloud:identity::team/78bb8f91-7cb0-48c3-800d-b7c307011e34
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/evosecurity/EvoLinuxAgent-Public
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:c
+  - source:github
+customFields: null
