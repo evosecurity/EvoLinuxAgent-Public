@@ -25,7 +25,7 @@ sudo make install
 
 ### Configuration
 
-1. Edit `/etc/evosecurity.d/config.ini`:
+1. Edit `/etc/evosecurity/config.ini`:
 
 ```ini
 [api]
