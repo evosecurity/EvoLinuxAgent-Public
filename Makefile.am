@@ -17,12 +17,12 @@ pamconfdir = $(sysconfdir)/pam.d
 # Install hook to copy files as requested
 install-data-hook:
 	$(MKDIR_P) $(DESTDIR)$(configdir)
-	$(MKDIR_P) $(DESTDIR)$(pamconfdir)
+	$(MKDIR_P) $(pamconfdir)
 	if [ ! -f $(DESTDIR)$(configdir)/config.ini ]; then \
 		cp config/config.ini.default $(DESTDIR)$(configdir)/config.ini; \
 	fi
-	if [ ! -f $(DESTDIR)$(pamconfdir)/evo_common ]; then \
-		echo "auth sufficient pam_evo_common.so" > $(DESTDIR)$(pamconfdir)/evo_common; \
+	if [ ! -f $(pamconfdir)/evo_common ]; then \
+		echo "auth sufficient pam_evo_common.so" > $(pamconfdir)/evo_common; \
 	fi
 
 # Handle installation of header files and other data
