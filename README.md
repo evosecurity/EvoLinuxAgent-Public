@@ -1,4 +1,5 @@
 # Evo Linux Agent
+An Evo Elevated Access license is required for any authentication.
 
 ## Warning
 This is beta software and should not be used in production systems. By installing this software, you agree that Evo is not liable for any problems that may arise from its use.
@@ -6,21 +7,19 @@ This is beta software and should not be used in production systems. By installin
 ## Dependencies
 Required dependencies:
 ```shell
-sudo apt install build-essential libpam0g-dev autoconf automake libtool
+build-essential libpam0g-dev autoconf automake libtool libssl1.1
 ```
+These will be installed automatically as part of the installation script
 
 ## Installation
 
 ### Building from Source
 ```shell
-./autogen.sh && \
-./configure && \
-make && \
-sudo make install
+sudo ./install.sh
 ```
 
 ### Configuration
-1. Edit `/etc/evosecurity.d/config.ini`:
+1. Edit `/usr/local/etc/evosecurity.d/evopam.conf`:
 ```ini
 [api]
 access_token=   # Your access token
@@ -36,6 +35,7 @@ GSSAPIAuthentication no
 PasswordAuthentication no
 KbdInteractiveAuthentication yes
 ```
+If any of these are already set up by default on your system, be sure to change them, rather than just adding the setting.
 
 3. Restart SSH service:
 ```shell
@@ -48,13 +48,17 @@ sudo systemctl restart sshd
 sudo adduser <username>
 ```
 
-2. Enable Evo authentication by editing `/etc/pam.d/sshd`:
+2. Enable Evo authentication by editing `/etc/pam.d/common-auth` with the following above any other PAM rules: 
 ```sh
 @include evo_common
 ```
 
+3. To change the email, you can edit the file at /home/{user}/.evoprofile
+
+
 ### Failsafe Access
-A temporary failsafe user named `user` is available to bypass MFA login methods during beta testing. Note that you must create an underlying user named `user` to enable this functionality.
+To exclude users from EVO Authentication, put the name of the user on a new line of `/usr/local/etc/evosecurity.d/excludedusers`
+By default, 'user' is included in this file.
 
 ### Uninstallation
 ```shell

@@ -14,9 +14,3 @@ autoheader
 automake --add-missing --copy --force-missing
 autoconf
 
-echo "Build system files have been generated."
-echo ""
-echo "To build the project, run:"
-echo "./configure"
-echo "make"
-echo "sudo make install"
