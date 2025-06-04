@@ -1,9 +1,6 @@
 # Evo Linux Agent
 An Evo Elevated Access license is required for any authentication.
 
-## Warning
-This is beta software and should not be used in production systems. By installing this software, you agree that Evo is not liable for any problems that may arise from its use.
-
 ## Dependencies
 Required dependencies:
 ```shell
